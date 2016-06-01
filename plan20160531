@@ -48,3 +48,32 @@ Basic Class Structure:
 	methods:
 	Game(level) <--- creates a Game for a level, game gets more difficult as level increases.
 	
+WORK FLOW:
+
+We will use proccessing to make this, I hope i spelled proccessing right there isnt a spell check in vim.
+
+First things first is to create a basic functionality version which should include a basic Game where we 
+can hardcode the board as an array, and the user can move the block and finish the level.
+
+The core of the projects difficulty is in the random generation of the GameBoard.  
+There needs to be at least one solution but possibly more depending on how difficult the level is.
+
+Once we have the random generation going of the board we can work on the flow of getting from one level to another.
+Possibly even allowing the user to select a level.  Our goal is with the random generation of the board, there should
+be able to be unlimited levels.
+
+Then we can go back and revisit our data structures.  We have to think about whether it would be more
+efficient to do this with linkedlists or arrays.  We wont to be able to incorprate the data structures
+we have learned but we realize that a lot of that will be in the random generation of the board.
+Changing the underlying data structure for the game board would not be feasible as a last step, but changing
+around our algorithm for board generation is.
+
+
+In terms of delegating tasks:
+
+We can have one person in charge of creating the Game and Tile class,
+one person in charge of creating the GameBoard class, and one
+person in charge of the Game class.
+
+Once we have this underlying structure then i imagine it will be a lot of us working together
+on things.
