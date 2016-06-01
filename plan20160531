@@ -59,8 +59,8 @@ The core of the projects difficulty is in the random generation of the GameBoard
 There needs to be at least one solution but possibly more depending on how difficult the level is.
 
 Once we have the random generation going of the board we can work on the flow of getting from one level to another.
-Possibly even allowing the user to select a level.  Our goal is with the random generation of the board, there should
-be able to be unlimited levels.
+Possibly even allowing the user to select a level, by seeding random generation and letting the user enter a seed for a certain level.
+Our goal is with the random generation of the board, there should be able to be unlimited levels.
 
 Then we can go back and revisit our data structures.  We have to think about whether it would be more
 efficient to do this with linkedlists or arrays.  We wont to be able to incorprate the data structures
