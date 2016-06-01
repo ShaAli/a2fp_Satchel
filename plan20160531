@@ -1,1 +1,50 @@
-here is our plan
+Basic Class Structure:
+
+-Block Class
+	This is the player, i.e what the user controls
+	instance variables:
+		xPOS
+		yPOS
+
+	methods:
+		move()
+		fall()
+		die()
+		Block(xInitial,yInitial) <--- constructor
+
+
+-Tile Class
+	This is what the user moves on
+	instance variables:
+		xPOS
+		yPOS
+		isVisible
+		isStart
+		isEnd
+
+	methods:
+		Tile()	<--- constructor
+
+-GameBoard
+	This is an array of tiles
+	it is randomly generated.
+	
+	instance variables:
+		size
+		difficulty
+
+	methods:
+		GameBoard(difficulty, size) <--- constructor
+		creates an array of tiles, difficulty is measured in size of array, how many pathds there are,
+		and how deviated the path is.
+
+-Game
+	This is the class that creates a Game with a generated GameBoard and Block.
+	
+	instance variables:
+	player <--- a Block
+	gameboard <--- a GameBoard
+
+	methods:
+	Game(level) <--- creates a Game for a level, game gets more difficult as level increases.
+	
