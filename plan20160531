@@ -71,7 +71,7 @@ around our algorithm for board generation is.
 
 In terms of delegating tasks:
 
-We can have one person in charge of creating the Game and Tile class,
+We can have one person in charge of creating the Tile class,
 one person in charge of creating the GameBoard class, and one
 person in charge of the Game class.
 
