@@ -1,5 +1,7 @@
 final int BOARD_SIZE = 15;
 final int TILE_SIZE = 70;
+final int BLOCK_SIZE = 70;
+
 Board board;
 
 public void settings() {

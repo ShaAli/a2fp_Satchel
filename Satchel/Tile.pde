@@ -39,7 +39,7 @@ class Tile {
       fill(tileColor);
       stroke(0);
       translate(x * TILE_SIZE, y * TILE_SIZE, 0);
-      box(TILE_SIZE);
+      box(TILE_SIZE); 
       translate(-x * TILE_SIZE, -y * TILE_SIZE, 0);
       fill(0);
       text(x + ", " + y, x * TILE_SIZE - TILE_SIZE / 2, y * TILE_SIZE + TILE_SIZE / 2, TILE_SIZE / 2 + 5);
