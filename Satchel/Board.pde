@@ -1,23 +1,33 @@
+import java.util.Random;
 class Board {
   private Tile[][] board;
+  private long seed;
+  private Random RNG;
+  
+  public Board() { // makes an empty board 
+    this((long) ((Math.random() * Long.MAX_VALUE - Long.MAX_VALUE / 2) * 2));
+    //seed can be almost any long value: if random gens 0, we get seed is -2^63 + 2, which is long min + 2
+    //if random gens just below 1, we get seed is (2^63-2 - (2^62 - 1)) * 2 which is (2^62 - 1) * 2 which is long max - 1
+    //so seed can be all but 4 long values
+  }
 
-  public Board() { // makes an empty board
+  public Board(long s) { // seeds RNG
     board = new Tile[BOARD_SIZE][BOARD_SIZE];
     for (int r = 0; r < BOARD_SIZE; r++) {
       for (int c = 0; c < BOARD_SIZE; c++) {
         board[r][c] = new Tile();
       }
     }
+    seed = s;
+    RNG = new Random(seed);
   }
-
-
   public void createBoard() {
-    int x = (int)(Math.random() * BOARD_SIZE);
-    int y = (int)(Math.random() * BOARD_SIZE);
+    int x = (int)(RNG.nextFloat() * BOARD_SIZE);
+    int y = (int)(RNG.nextFloat() * BOARD_SIZE);
     board[x][y] = new Tile(Tile.START);
     int tilesmade = 1;
     while (tilesmade < (BOARD_SIZE * BOARD_SIZE / 2)) { // for now, fill half the board 
-      int random = (int)(Math.random()*4);
+      int random = (int)(RNG.nextFloat()*4);
       try {
         if ((random == 0) && !board[x+1][y].isActivated()) {
           board[x+1][y].setActive(true);
@@ -45,6 +55,8 @@ class Board {
   }
 
   public void draw() {
+    fill(0);
+    text("Seed: " + seed, 50, 50);
     rotateX(0.6);
     translate(BOARD_SIZE * TILE_SIZE / 4, BOARD_SIZE * TILE_SIZE / 2 - TILE_SIZE * 6, -TILE_SIZE * 3);
     scale(0.5);
