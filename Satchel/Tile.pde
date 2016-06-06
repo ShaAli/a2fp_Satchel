@@ -16,13 +16,13 @@ class Tile {
     yCor = y;
     inPlay = true; //special tiles start activated
     if(t == Type.NORMAL) {
-      tileColor = color(128);
+      tileColor = color(128, TILE_ALPHA);
     }
     if(t == Type.START) {
-      tileColor = color(50, 200, 50);
+      tileColor = color(50, 200, 50, TILE_ALPHA);
     }
     if(t == Type.END) {
-      tileColor = color(200, 50, 50);
+      tileColor = color(200, 50, 50, TILE_ALPHA);
     }
   }
   

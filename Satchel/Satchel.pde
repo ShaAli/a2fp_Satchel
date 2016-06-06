@@ -1,6 +1,7 @@
 final int BOARD_SIZE = 15;
 final int TILE_SIZE = 60;
 final int BLOCK_SIZE = 70;
+final int TILE_ALPHA = 120;
 final boolean SHOW_COORDS = true;
 
 Board board;
@@ -16,6 +17,8 @@ public void settings() {
 }
 
 public void setup() {
+  hint(DISABLE_OPTIMIZED_STROKE);
+  strokeWeight(2);
   PFont font = createFont("ACaslonPro-Bold-20.vlw", 20);
   textFont(font);
   smooth();
