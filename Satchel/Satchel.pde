@@ -1,10 +1,15 @@
-final int BOARD_SIZE = 30;
-final int TILE_SIZE = 30;
+final int BOARD_SIZE = 15;
+final int TILE_SIZE = 60;
 final int BLOCK_SIZE = 70;
-final boolean SHOW_COORDS = false;
+final boolean SHOW_COORDS = true;
 
 Board board;
-
+float rotX = 0.6;
+float rotY = 0;
+float scale = 0.5;
+int oldMouseX = mouseX;
+int oldMouseY = mouseY;
+    
 public void settings() {
   size(BOARD_SIZE * TILE_SIZE + 50, BOARD_SIZE * TILE_SIZE + 50, P3D);
 }
@@ -16,15 +21,46 @@ public void setup() {
   background(180);
   board = new Board();
   board.createBoard();
-  board.draw();
 }
 
 public void draw() {
+  if(mousePressed) {
+    if(oldMouseX != -1) {
+      rotY -= (mouseX - oldMouseX) / 180.0;
+      rotX += (mouseY - oldMouseY) / 180.0;
+    }
+    oldMouseX = mouseX;
+    oldMouseY = mouseY;
+  }
+  else {
+    oldMouseX = -1;
+  }
+  background(180);
+  fill(0);
+  text("Seed: " + board.getSeed(), 50, 50);
+  
+  scale(scale);
+  translate(BOARD_SIZE * TILE_SIZE, BOARD_SIZE * TILE_SIZE); //to rotate around center
+  rotateX(rotX);
+  rotateY(rotY);
+  translate(-BOARD_SIZE * TILE_SIZE, -BOARD_SIZE * TILE_SIZE); // undo centering
+  translate(BOARD_SIZE * TILE_SIZE / 4, BOARD_SIZE * TILE_SIZE / 2 - TILE_SIZE * 6, -TILE_SIZE * 3); // for better board centering, might improve on this later with pan
+  
+  board.draw();
+    
 }
   
 public void mouseClicked() {
-  background(180);
-  board = new Board();
-  board.createBoard();
-  board.draw();
+  
+}
+
+public void keyPressed() {
+  char k = Character.toLowerCase(key);
+  if(k == '-') scale *= 0.9;
+  if(k == '+') scale /= 0.9;
+  if(k == ' ') {
+    board = new Board();
+    board.createBoard();
+  }
+
 }

@@ -11,6 +11,8 @@ class Board {
     //so seed can be all but 4 long values
   }
 
+  public long getSeed() { return seed; }
+
   public Board(long s) { // seeds RNG
     board = new Tile[BOARD_SIZE][BOARD_SIZE];
     for (int r = 0; r < BOARD_SIZE; r++) {
@@ -56,10 +58,6 @@ class Board {
 
   public void draw() {
     fill(0);
-    text("Seed: " + seed, 50, 50);
-    rotateX(0.6);
-    translate(BOARD_SIZE * TILE_SIZE / 4, BOARD_SIZE * TILE_SIZE / 2 - TILE_SIZE * 6, -TILE_SIZE * 3);
-    scale(0.5);
     for(int x = 0; x < BOARD_SIZE; x++) {
       for(int y = 0; y < BOARD_SIZE; y++) {
         board[x][y].draw(x,y);
