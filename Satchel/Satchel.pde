@@ -1,6 +1,7 @@
-final int BOARD_SIZE = 15;
-final int TILE_SIZE = 70;
-final int BLOCK_SIZE = 30;
+final int BOARD_SIZE = 30;
+final int TILE_SIZE = 30;
+final int BLOCK_SIZE = 70;
+final boolean SHOW_COORDS = false;
 
 Board board;
 
