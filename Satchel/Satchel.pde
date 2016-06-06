@@ -1,5 +1,12 @@
+<<<<<<< HEAD
 final int BOARD_SIZE = 15;
 final int TILE_SIZE = 70;
+=======
+final int BOARD_SIZE = 30;
+final int TILE_SIZE = 30;
+final int BLOCK_SIZE = 70;
+final boolean SHOW_COORDS = false;
+>>>>>>> 3de85f79da5dd3faf1d9e81010cb76a4a57df62b
 
 Board board;
 Player playah;
