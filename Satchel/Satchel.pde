@@ -1,9 +1,8 @@
 final int BOARD_SIZE = 15;
 final int TILE_SIZE = 70;
-final int BLOCK_SIZE = 70;
 
 Board board;
-
+Player playah;
 public void settings() {
   size(BOARD_SIZE * TILE_SIZE + 50, BOARD_SIZE * TILE_SIZE + 50, P3D);
 }
@@ -16,9 +15,8 @@ public void setup() {
   board = new Board();
   board.createBoard();
   board.draw();
-}
-
-public void draw() {
+  playah = new Player(board);
+  playah.draw();
 }
   
 public void mouseClicked() {
@@ -26,4 +24,6 @@ public void mouseClicked() {
   board = new Board();
   board.createBoard();
   board.draw();
+  playah = new Player(board);
+  playah.draw();
 }

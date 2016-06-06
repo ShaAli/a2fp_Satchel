@@ -7,12 +7,16 @@ class Tile {
   private boolean inPlay;
   private int tileColor;
   private int type;
-  public Tile() { // used when making tile array
-    this(NORMAL); // normal type 
+  private int xCor;
+  private int yCor;
+  public Tile(int x, int y) { // used when making tile array
+    this(NORMAL, x, y); // normal type 
     inPlay = false; //default tiles start inactive before createBoard
   }
   
-  public Tile(int t) {
+  public Tile(int t, int x, int y) {
+    xCor = x;
+    yCor = y;
     type = t;
     inPlay = true; //special tiles start activated
     if(t == NORMAL) {
@@ -30,11 +34,20 @@ class Tile {
     inPlay = p;
   }
 
+  public int getX() {
+     return xCor; 
+  }
+  
+  public int getY() {
+     return yCor; 
+  }
   public boolean isActivated() {
     return inPlay;
   }   
 
   public void draw(int x, int y) {
+    xCor = x;
+    yCor = y;
     if(inPlay) {
       fill(tileColor);
       stroke(0);

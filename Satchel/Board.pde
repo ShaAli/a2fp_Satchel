@@ -1,8 +1,9 @@
 import java.util.Random;
 class Board {
-  private Tile[][] board;
+  public Tile[][] board;
   private long seed;
   private Random RNG;
+  private Tile startTile, endTile;
   
   public Board() { // makes an empty board 
     this((long) ((Math.random() * Long.MAX_VALUE - Long.MAX_VALUE / 2) * 2));
@@ -15,17 +16,23 @@ class Board {
     board = new Tile[BOARD_SIZE][BOARD_SIZE];
     for (int r = 0; r < BOARD_SIZE; r++) {
       for (int c = 0; c < BOARD_SIZE; c++) {
-        board[r][c] = new Tile();
+        board[r][c] = new Tile(r, c);
       }
     }
     seed = s;
     RNG = new Random(seed);
   }
+  public Tile getStart() {
+    return startTile;
+    
+  }
   public void createBoard() {
     int x = (int)(RNG.nextFloat() * BOARD_SIZE);
     int y = (int)(RNG.nextFloat() * BOARD_SIZE);
-    board[x][y] = new Tile(Tile.START);
+    board[x][y] = new Tile(Tile.START, x, y);
+    startTile = board[x][y];
     int tilesmade = 1;
+    
     while (tilesmade < (BOARD_SIZE * BOARD_SIZE / 2)) { // for now, fill half the board 
       int random = (int)(RNG.nextFloat()*4);
       try {
@@ -51,19 +58,22 @@ class Board {
       tilesmade++;
     }
     //at the end, x,y will be the last tile, make it an end tile
-    board[x][y] = new Tile(Tile.END);
+    board[x][y] = new Tile(Tile.END, x, y);
+    endTile = board[x][y];
   }
 
   public void draw() {
     fill(0);
+    
     text("Seed: " + seed, 50, 50);
-    rotateX(0.6);
     translate(BOARD_SIZE * TILE_SIZE / 4, BOARD_SIZE * TILE_SIZE / 2 - TILE_SIZE * 6, -TILE_SIZE * 3);
+    rotateX(0.3);
     scale(0.5);
     for(int x = 0; x < BOARD_SIZE; x++) {
       for(int y = 0; y < BOARD_SIZE; y++) {
         board[x][y].draw(x,y);
       }
     }
+    
   }
 }
