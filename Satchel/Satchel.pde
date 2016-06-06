@@ -62,4 +62,11 @@ public void keyPressed() {
     board.createBoard();
     player = new Player(board);
   }
+  if (k == 'd') player.move(1,0);
+  if (k == 'a') player.move(-1,0);
+  if (k == 's') player.move(0,1);
+    if (k == 'w') player.move(0,-1);
+
+
+
 }
