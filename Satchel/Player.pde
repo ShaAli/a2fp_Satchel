@@ -20,8 +20,10 @@ class Player {
   
   public void move(int x, int y) {
        if (gameboard.board[curr.getX() + x][curr.getY() + y].isActivated()) {  
+                gameboard.board[curr.getX()][curr.getY()].setActive(false);
          curr = gameboard.board[curr.getX() + x][curr.getY() + y];
        }
+       
   }
 
 
