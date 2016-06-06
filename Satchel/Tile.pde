@@ -1,31 +1,27 @@
+public static enum Type { NORMAL, START, END };
+
 class Tile {
-  // enum for tile type
-  public static final int NORMAL = -1;
-  public static final int START = 0;
-  public static final int END = 1;
-  
+  final static int aosidj = 1;
   private boolean inPlay;
   private int tileColor;
-  private int type;
   private int xCor;
   private int yCor;
   public Tile(int x, int y) { // used when making tile array
-    this(NORMAL, x, y); // normal type 
+    this(Type.NORMAL, x, y); // normal type 
     inPlay = false; //default tiles start inactive before createBoard
   }
   
-  public Tile(int t, int x, int y) {
+  public Tile(Type t, int x, int y) {
     xCor = x;
     yCor = y;
-    type = t;
     inPlay = true; //special tiles start activated
-    if(t == NORMAL) {
+    if(t == Type.NORMAL) {
       tileColor = color(128);
     }
-    if(t == START) {
+    if(t == Type.START) {
       tileColor = color(50, 200, 50);
     }
-    if(t == END) {
+    if(t == Type.END) {
       tileColor = color(200, 50, 50);
     }
   }

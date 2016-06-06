@@ -31,7 +31,7 @@ class Board {
   public void createBoard() {
     int x = (int)(RNG.nextFloat() * BOARD_SIZE);
     int y = (int)(RNG.nextFloat() * BOARD_SIZE);
-    board[x][y] = new Tile(Tile.START, x, y);
+    board[x][y] = new Tile(Type.START, x, y);
     startTile = board[x][y];
     int tilesmade = 1;
     
@@ -60,7 +60,7 @@ class Board {
       tilesmade++;
     }
     //at the end, x,y will be the last tile, make it an end tile
-    board[x][y] = new Tile(Tile.END, x, y);
+    board[x][y] = new Tile(Type.END, x, y);
     endTile = board[x][y];
   }
 
