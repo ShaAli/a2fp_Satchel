@@ -1,8 +1,9 @@
 import java.util.Random;
 class Board {
-  private Tile[][] board;
+  public Tile[][] board;
   private long seed;
   private Random RNG;
+  private Tile startTile, endTile;
   
   public Board() { // makes an empty board 
     this((long) ((Math.random() * Long.MAX_VALUE - Long.MAX_VALUE / 2) * 2));
@@ -17,17 +18,23 @@ class Board {
     board = new Tile[BOARD_SIZE][BOARD_SIZE];
     for (int r = 0; r < BOARD_SIZE; r++) {
       for (int c = 0; c < BOARD_SIZE; c++) {
-        board[r][c] = new Tile();
+        board[r][c] = new Tile(r, c);
       }
     }
     seed = s;
     RNG = new Random(seed);
   }
+  public Tile getStart() {
+    return startTile;
+    
+  }
   public void createBoard() {
     int x = (int)(RNG.nextFloat() * BOARD_SIZE);
     int y = (int)(RNG.nextFloat() * BOARD_SIZE);
-    board[x][y] = new Tile(Tile.START);
+    board[x][y] = new Tile(Tile.START, x, y);
+    startTile = board[x][y];
     int tilesmade = 1;
+    
     while (tilesmade < (BOARD_SIZE * BOARD_SIZE / 2)) { // for now, fill half the board 
       int random = (int)(RNG.nextFloat()*4);
       try {
@@ -53,7 +60,8 @@ class Board {
       tilesmade++;
     }
     //at the end, x,y will be the last tile, make it an end tile
-    board[x][y] = new Tile(Tile.END);
+    board[x][y] = new Tile(Tile.END, x, y);
+    endTile = board[x][y];
   }
 
   public void draw() {
@@ -63,5 +71,6 @@ class Board {
         board[x][y].draw(x,y);
       }
     }
+    
   }
 }

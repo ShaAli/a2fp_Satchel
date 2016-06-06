@@ -9,7 +9,8 @@ float rotY = 0;
 float scale = 0.5;
 int oldMouseX = mouseX;
 int oldMouseY = mouseY;
-    
+Player player;
+
 public void settings() {
   size(BOARD_SIZE * TILE_SIZE + 50, BOARD_SIZE * TILE_SIZE + 50, P3D);
 }
@@ -21,6 +22,7 @@ public void setup() {
   background(180);
   board = new Board();
   board.createBoard();
+  player = new Player(board);
 }
 
 public void draw() {
@@ -47,11 +49,8 @@ public void draw() {
   translate(BOARD_SIZE * TILE_SIZE / 4, BOARD_SIZE * TILE_SIZE / 2 - TILE_SIZE * 6, -TILE_SIZE * 3); // for better board centering, might improve on this later with pan
   
   board.draw();
+  player.draw();
     
-}
-  
-public void mouseClicked() {
-  
 }
 
 public void keyPressed() {
@@ -61,6 +60,6 @@ public void keyPressed() {
   if(k == ' ') {
     board = new Board();
     board.createBoard();
+    player = new Player(board);
   }
-
 }
