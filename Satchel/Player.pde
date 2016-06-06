@@ -1,18 +1,11 @@
 class Player {
-  // enum for tile type
-  //public static final int NORMAL = -1;
-  //public static final int START = 0;
-  //public static final int END = 1;
-  
-  
-  
   private boolean alive;
   private Board gameboard;
   private Tile curr;
   
-  public Player(Board b) { // used when making tile array
+  public Player(Board b) { // players board
     gameboard = b;
-   alive = true; //default tiles start inactive before createBoard
+   alive = true; // starts alive becomes dead
    curr = gameboard.getStart();
   }
   
@@ -27,9 +20,13 @@ class Player {
   
   public void move(int x, int y) {
        if (gameboard.board[curr.getX() + x][curr.getY() + y].isActivated()) {  
+<<<<<<< HEAD
                 gameboard.board[curr.getX()][curr.getY()].setActive(false);
 
        curr = gameboard.board[curr.getX() + x][curr.getY() + y];
+=======
+         curr = gameboard.board[curr.getX() + x][curr.getY() + y];
+>>>>>>> 477ea9c80e40522cc73e280803f41b22cec22e8e
        }
        
   }
