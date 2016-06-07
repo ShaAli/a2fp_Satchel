@@ -11,6 +11,7 @@ class Tile {
     inPlay = false; //default tiles start inactive before createBoard
   }
   
+  
   public Tile(Type t, int x, int y) {
     xCor = x;
     yCor = y;

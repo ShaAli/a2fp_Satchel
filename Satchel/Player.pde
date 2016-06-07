@@ -12,16 +12,47 @@ class Player {
   
   public void die() {
     alive = false;
+    ALIVE = false;
   }
 
   public boolean isAlive() {
     return alive;
-  }   
+  }
+  public void finish()  {
+      if (board.numAlive() == -1) {
+          ALIVE = false;
+          COMPLETE = true;
+      }
+      else {
+        die();
+      }
+  }
   
   public void move(int x, int y) {
-       if (gameboard.board[curr.getX() + x][curr.getY() + y].isActivated()) {  
+       if (((curr.getX() + x) >= 0) && ((curr.getX() + x) < gameboard.board.length) && ((curr.getY() + y) < gameboard.board[0].length)  && ((curr.getY() + y) >= 0)) {
+       if (gameboard.board[curr.getX() + x][curr.getY() + y].isActivated()) {
+                if (gameboard.board[curr.getX() + x][curr.getY() + y].equals(gameboard.endTile)) {
+                                  gameboard.board[curr.getX()][curr.getY()].setActive(false);
+                                  gameboard.killTile();
+                                  curr = gameboard.board[curr.getX() + x][curr.getY() + y];
+                                  finish();
+                                  
+
+                }
+
                 gameboard.board[curr.getX()][curr.getY()].setActive(false);
-         curr = gameboard.board[curr.getX() + x][curr.getY() + y];
+                gameboard.killTile();
+                curr = gameboard.board[curr.getX() + x][curr.getY() + y];
+       }
+       else {
+         die();
+         
+       }
+       }
+       else {
+         
+         die();
+         
        }
        
   }

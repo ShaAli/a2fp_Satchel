@@ -4,7 +4,7 @@ class Board {
   private long seed;
   private Random RNG;
   private Tile startTile, endTile;
-  
+  private int tilesAlive;
   public Board() { // makes an empty board 
     this((long) ((Math.random() * Long.MAX_VALUE - Long.MAX_VALUE / 2) * 2));
     //seed can be almost any long value: if random gens 0, we get seed is -2^63 + 2, which is long min + 2
@@ -23,11 +23,14 @@ class Board {
     }
     seed = s;
     RNG = new Random(seed);
+    tilesAlive = 0;
   }
   public Tile getStart() {
     return startTile;
     
   }
+  public int numAlive() {return tilesAlive;}
+  public void killTile() { tilesAlive--; }
   public void createBoard() {
     int x = (int)(RNG.nextFloat() * BOARD_SIZE);
     int y = (int)(RNG.nextFloat() * BOARD_SIZE);
@@ -36,24 +39,30 @@ class Board {
     int tilesmade = 1;
     
     while (tilesmade < (BOARD_SIZE * BOARD_SIZE / 2)) { // for now, fill half the board 
+      
       int random = (int)(RNG.nextFloat()*4);
       try {
         if ((random == 0) && !board[x+1][y].isActivated()) {
           board[x+1][y].setActive(true);
           x++;
+          tilesAlive++;
         }
         if ((random == 1) && !board[x][y+1].isActivated()) {
           board[x][y+1].setActive(true);
           y++;
+          tilesAlive++;
         }
         if ((random == 2) && !board[x-1][y].isActivated()) {
           board[x-1][y].setActive(true);
           x--;
+          tilesAlive++;
         }
         if ((random == 3) && !board[x][y-1].isActivated()) {
           board[x][y-1].setActive(true);
           y--;
+          tilesAlive++;
         }
+        
       }
       catch (IndexOutOfBoundsException e) { // occurs if we go outside board, just stops
       }
