@@ -19,13 +19,14 @@ class Player {
     return alive;
   }
   public void finish()  {
-      if (board.numAlive() == -1) {
-          ALIVE = false;
+      if (board.numAlive() <= 1) {
           COMPLETE = true;
+          die();
       }
       else {
         die();
       }
+      
   }
   
   public void move(int x, int y) {
@@ -33,9 +34,10 @@ class Player {
        if (gameboard.board[curr.getX() + x][curr.getY() + y].isActivated()) {
                 if (gameboard.board[curr.getX() + x][curr.getY() + y].equals(gameboard.endTile)) {
                                   gameboard.board[curr.getX()][curr.getY()].setActive(false);
+                                  finish();
+
                                   gameboard.killTile();
                                   curr = gameboard.board[curr.getX() + x][curr.getY() + y];
-                                  finish();
                                   
 
                 }

@@ -56,22 +56,22 @@ public void draw() {
     
     board.draw();
     player.draw();
-    }
+    } 
     else {
-      if (COMPLETE == true) {
-         noLoop();
-  background(255);
-  fill(0);
-  text("you FINISHED NICE BRUH", 200, 200);
+      if (COMPLETE) {
+      noLoop();
+      background(255);
+      fill(0);
+      text("CONGRATS U WON!!", 200, 200);
       }
-      
       else {
-  noLoop();
-  background(255);
-  fill(0);
-  text(board.numAlive(), 200, 200);
+        noLoop();
+      background(255);
+      fill(0);
+      text("you fucked up", 200, 200);
       }
     }
+    
 }
 
 public void keyPressed() {
