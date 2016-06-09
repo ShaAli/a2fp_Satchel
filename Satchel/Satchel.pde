@@ -2,10 +2,11 @@ final int BOARD_SIZE = 15;
 final int TILE_SIZE = 60;
 final int BLOCK_SIZE = 70;
 final int TILE_ALPHA = 120;
- boolean ALIVE = true;
- boolean COMPLETE = false;
+boolean ALIVE = true;
+boolean COMPLETE = false;
 final boolean SHOW_COORDS = true;
 
+Board layout; // stores untouched copy of board
 Board board;
 float rotX = 0.6;
 float rotY = 0;
@@ -25,9 +26,7 @@ public void setup() {
   textFont(font);
   smooth();
   background(180);
-  board = new Board();
-  board.createBoard();
-  player = new Player(board);
+  generateBoard();
 }
 
 public void draw() {
@@ -59,19 +58,28 @@ public void draw() {
     } 
     else {
       if (COMPLETE) {
-      noLoop();
-      background(255);
-      fill(0);
-      text("CONGRATS U WON!!", 200, 200);
+        generateBoard();
+        player.undie();
+        COMPLETE = false;
       }
       else {
-        noLoop();
-      background(255);
-      fill(0);
-      text("you fucked up", 200, 200);
+        resetBoard();
+        player.undie();
       }
     }
     
+}
+
+public void generateBoard() {
+  board = new Board();
+  board.createBoard();
+  player = new Player(board);
+  layout = new Board(board);
+}
+
+public void resetBoard() {
+  board = new Board(layout);
+  player = new Player(board);
 }
 
 public void keyPressed() {
@@ -79,9 +87,7 @@ public void keyPressed() {
   if(k == '-') scale *= 0.9;
   if(k == '+') scale /= 0.9;
   if(k == ' ') {
-    board = new Board();
-    board.createBoard();
-    player = new Player(board);
+    generateBoard();
   }
   if (k == 'd') player.move(1,0);
   if (k == 'a') player.move(-1,0);

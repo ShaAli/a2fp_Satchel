@@ -14,7 +14,12 @@ class Player {
     alive = false;
     ALIVE = false;
   }
-
+  
+  public void undie() {
+    alive = true;
+    ALIVE = true;
+  }
+  
   public boolean isAlive() {
     return alive;
   }
@@ -34,10 +39,11 @@ class Player {
        if (gameboard.board[curr.getX() + x][curr.getY() + y].isActivated()) {
                 if (gameboard.board[curr.getX() + x][curr.getY() + y].equals(gameboard.endTile)) {
                                   gameboard.board[curr.getX()][curr.getY()].setActive(false);
+                                  curr = gameboard.board[curr.getX() + x][curr.getY() + y];
+                                  gameboard.killTile();
                                   finish();
 
-                                  gameboard.killTile();
-                                  curr = gameboard.board[curr.getX() + x][curr.getY() + y];
+                                  
                                   
 
                 }
