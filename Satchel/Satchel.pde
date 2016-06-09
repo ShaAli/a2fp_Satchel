@@ -68,7 +68,7 @@ public void draw() {
         noLoop();
       background(255);
       fill(0);
-      text("you fucked up", 200, 200);
+      text("you died", 200, 200);
       }
     }
     
