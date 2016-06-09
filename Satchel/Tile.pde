@@ -1,16 +1,22 @@
 public static enum Type { NORMAL, START, END };
 
 class Tile {
-  final static int aosidj = 1;
   private boolean inPlay;
   private int tileColor;
   private int xCor;
   private int yCor;
+  
   public Tile(int x, int y) { // used when making tile array
     this(Type.NORMAL, x, y); // normal type 
     inPlay = false; //default tiles start inactive before createBoard
   }
   
+  public Tile(Tile other) { // copy constructor
+    inPlay = other.inPlay;
+    tileColor = other.tileColor;
+    xCor = other.xCor;
+    yCor = other.yCor;
+  }
   
   public Tile(Type t, int x, int y) {
     xCor = x;

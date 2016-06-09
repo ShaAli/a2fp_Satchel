@@ -5,6 +5,7 @@ class Board {
   private Random RNG;
   private Tile startTile, endTile;
   private int tilesAlive;
+  
   public Board() { // makes an empty board 
     this((long) ((Math.random() * Long.MAX_VALUE - Long.MAX_VALUE / 2) * 2));
     //seed can be almost any long value: if random gens 0, we get seed is -2^63 + 2, which is long min + 2
@@ -25,6 +26,21 @@ class Board {
     RNG = new Random(seed);
     tilesAlive = 0;
   }
+  
+  public Board(Board other) { // copy constructor for board storage
+    seed = other.seed;
+    RNG = new Random(seed); 
+    startTile = new Tile(other.startTile);
+    endTile = new Tile(other.endTile);
+    tilesAlive = other.tilesAlive;
+    board = new Tile[other.board.length][other.board[0].length];
+    for(int x = 0; x < board.length; x++) {
+      for(int y = 0; y < board[0].length; y++) {
+        board[x][y] = new Tile(other.board[x][y]);
+      }
+    }
+  }
+  
   public Tile getStart() {
     return startTile;
     
