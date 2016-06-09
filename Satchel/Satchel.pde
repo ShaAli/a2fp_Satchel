@@ -5,6 +5,7 @@ final int TILE_ALPHA = 120;
 boolean ALIVE = true;
 boolean COMPLETE = false;
 final boolean SHOW_COORDS = true;
+int level = 1;
 
 Board layout; // stores untouched copy of board
 Board board;
@@ -30,6 +31,7 @@ public void setup() {
 }
 
 public void draw() {
+
   if (ALIVE) {
     if(mousePressed) {
       if(oldMouseX != -1) {
@@ -45,6 +47,8 @@ public void draw() {
     background(180);
     fill(0);
     text("Seed: " + board.getSeed(), 50, 50);
+    text("Level: " + level, 50, 100);
+
     
     scale(scale);
     translate(BOARD_SIZE * TILE_SIZE, BOARD_SIZE * TILE_SIZE); //to rotate around center
@@ -60,18 +64,15 @@ public void draw() {
       if (COMPLETE) {
         generateBoard();
         player.undie();
+        level++;
         COMPLETE = false;
       }
       else {
-<<<<<<< HEAD
         noLoop();
       background(255);
       fill(0);
-      text("you died", 200, 200);
-=======
         resetBoard();
         player.undie();
->>>>>>> 7b1b2ae83fce43e3aa0caa52532941cef1dd46c4
       }
     }
     
