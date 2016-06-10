@@ -68,9 +68,6 @@ public void draw() {
         COMPLETE = false;
       }
       else {
-        noLoop();
-      background(255);
-      fill(0);
         resetBoard();
         player.undie();
       }
