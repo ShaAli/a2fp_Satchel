@@ -42,10 +42,6 @@ class Player {
                                   curr = gameboard.board[curr.getX() + x][curr.getY() + y];
                                   gameboard.killTile();
                                   finish();
-
-                                  
-                                  
-
                 }
 
                 gameboard.board[curr.getX()][curr.getY()].setActive(false);
