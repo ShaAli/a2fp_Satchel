@@ -34,25 +34,43 @@ class Player {
       
   }
   
-  public void move(int x, int y) {
-       if (((curr.getX() + x) >= 0) && ((curr.getX() + x) < gameboard.board.length) && ((curr.getY() + y) < gameboard.board[0].length)  && ((curr.getY() + y) >= 0)) {
-       if (gameboard.board[curr.getX() + x][curr.getY() + y].isActivated()) {
-                if (gameboard.board[curr.getX() + x][curr.getY() + y].equals(gameboard.endTile)) {
-                                  gameboard.board[curr.getX()][curr.getY()].setActive(false);
-                                  curr = gameboard.board[curr.getX() + x][curr.getY() + y];
-                                  gameboard.killTile();
-                                  finish();
-                }
+  public void changePos (int x, int y) {
+        gameboard.board[curr.getX()][curr.getY()].setActive(false);
+        curr = gameboard.board[curr.getX() + x][curr.getY() + y];
+        gameboard.killTile();
 
-                gameboard.board[curr.getX()][curr.getY()].setActive(false);
-                gameboard.killTile();
-                curr = gameboard.board[curr.getX() + x][curr.getY() + y];
-       }
+  }
+  public boolean isEnd(int x , int y) {
+    return gameboard.board[curr.getX() + x][curr.getY() + y].equals(gameboard.endTile);
+  }
+   public boolean isActive(int x , int y) {
+    return gameboard.board[curr.getX() + x][curr.getY() + y].isActivated();
+  }
+  public boolean inBounds (int x, int y) {
+    return ((curr.getX() + x) >= 0) && ((curr.getX() + x) < gameboard.board.length) && ((curr.getY() + y) < gameboard.board[0].length)  && ((curr.getY() + y) >= 0);
+  }
+  public void move(int x, int y) {
+      //Tile is In Bounds
+       if (inBounds(x,y)) {
+         //Tile is Active
+         if (isActive(x,y)) {
+               //Tile is an Ending tile;
+                if (isEnd(x,y)) {
+                    changePos(x,y);         
+                    finish();
+                }
+                //Tile is regular
+                else {
+                  changePos(x,y);
+                 }
+         }
+         
+        //Tile is inActive
        else {
          die();
-         
        }
        }
+       //Tile is out of bounds
        else {
          
          die();

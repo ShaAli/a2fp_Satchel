@@ -50,6 +50,8 @@ public void draw() {
     text("Seed: " + board.getSeed(), 50, 50);
     text("Level: " + level, 50, 100);
     text(board.numAlive() + level, 50, 200);
+    text("Complete: " + COMPLETE, 50, 300);
+
 
     
     scale(scale);

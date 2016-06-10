@@ -52,7 +52,7 @@ class Board {
     int y = (int)(RNG.nextFloat() * BOARD_SIZE);
     board[x][y] = new Tile(Type.START, x, y);
     startTile = board[x][y];
-    int tilesmade = 1;
+    int tilesmade = 0;
     
     while (tilesmade < (BOARD_SIZE * BOARD_SIZE / 2)) { // for now, fill half the board 
       
@@ -64,19 +64,19 @@ class Board {
           tilesAlive++;
           board[x][y].setNum(tilesAlive);
         }
-        if ((random == 1) && !board[x][y+1].isActivated()) {
+        else if ((random == 1) && !board[x][y+1].isActivated()) {
           board[x][y+1].setActive(true);
           y++;
           tilesAlive++;
           board[x][y].setNum(tilesAlive);
         }
-        if ((random == 2) && !board[x-1][y].isActivated()) {
+        else if ((random == 2) && !board[x-1][y].isActivated()) {
           board[x-1][y].setActive(true);
           x--;
           tilesAlive++;
           board[x][y].setNum(tilesAlive);
         }
-        if ((random == 3) && !board[x][y-1].isActivated()) {
+        else if ((random == 3) && !board[x][y-1].isActivated()) {
           board[x][y-1].setActive(true);
           y--;
           tilesAlive++;
