@@ -5,6 +5,7 @@ class Tile {
   private int tileColor;
   private int xCor;
   private int yCor;
+  private int num;
   
   public Tile(int x, int y) { // used when making tile array
     this(Type.NORMAL, x, y); // normal type 
@@ -33,6 +34,10 @@ class Tile {
     }
   }
   
+  public void setNum(int numb) {
+    num = numb;
+  }
+  
   public void setActive(boolean p) {
     inPlay = p;
   }
@@ -59,7 +64,7 @@ class Tile {
       translate(-x * TILE_SIZE, -y * TILE_SIZE, 0);
       fill(0);
       if(SHOW_COORDS) text(x + ", " + y, x * TILE_SIZE - TILE_SIZE / 2, y * TILE_SIZE + TILE_SIZE / 2, TILE_SIZE / 2 + 5);
-    
+      if(SHOW_NUMBER) text(num, x * TILE_SIZE - TILE_SIZE / 2, y * TILE_SIZE + TILE_SIZE / 2, TILE_SIZE / 2 + 5);
     }
   }
 }

@@ -4,7 +4,8 @@ final int BLOCK_SIZE = 70;
 final int TILE_ALPHA = 120;
 boolean ALIVE = true;
 boolean COMPLETE = false;
-final boolean SHOW_COORDS = true;
+final boolean SHOW_COORDS = false;
+final boolean SHOW_NUMBER = true;
 int level = 1;
 
 Board layout; // stores untouched copy of board
@@ -48,6 +49,7 @@ public void draw() {
     fill(0);
     text("Seed: " + board.getSeed(), 50, 50);
     text("Level: " + level, 50, 100);
+    text(board.numAlive() + level, 50, 200);
 
     
     scale(scale);

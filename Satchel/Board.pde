@@ -62,22 +62,28 @@ class Board {
           board[x+1][y].setActive(true);
           x++;
           tilesAlive++;
+          board[x][y].setNum(tilesAlive);
         }
         if ((random == 1) && !board[x][y+1].isActivated()) {
           board[x][y+1].setActive(true);
           y++;
           tilesAlive++;
+          board[x][y].setNum(tilesAlive);
         }
         if ((random == 2) && !board[x-1][y].isActivated()) {
           board[x-1][y].setActive(true);
           x--;
           tilesAlive++;
+          board[x][y].setNum(tilesAlive);
         }
         if ((random == 3) && !board[x][y-1].isActivated()) {
           board[x][y-1].setActive(true);
           y--;
           tilesAlive++;
+          board[x][y].setNum(tilesAlive);
         }
+        //tilesAlive++;
+        
         
       }
       catch (IndexOutOfBoundsException e) { // occurs if we go outside board, just stops
