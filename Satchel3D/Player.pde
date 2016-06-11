@@ -26,7 +26,7 @@ class Player {
 
   public void die() {
     gameboard = new Board(layout);
-    curr = gameboard.startTile;
+    curr = gameboard.getStart();
   }
   public void win() {
     newBoard();
@@ -35,7 +35,7 @@ class Player {
   public void newBoard() {
     gameboard = generateBoard();
     layout = new Board(gameboard);
-    curr = gameboard.startTile;
+    curr = gameboard.getStart();
   }
   public void end() { // used when end tile is hit. If end is last tile, you win, otherwise you die
     print("End called");
