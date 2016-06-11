@@ -3,9 +3,8 @@ public static enum Type { NORMAL, START, END };
 class Tile {
   private boolean inPlay;
   private int tileColor;
-  private int xCor;
-  private int yCor;
-  private int num;
+  private int row;
+  private int col;
   
   public Tile(int x, int y) { // used when making tile array
     this(Type.NORMAL, x, y); // normal type 
@@ -15,13 +14,13 @@ class Tile {
   public Tile(Tile other) { // copy constructor
     inPlay = other.inPlay;
     tileColor = other.tileColor;
-    xCor = other.xCor;
-    yCor = other.yCor;
+    row = other.row;
+    col = other.col;
   }
   
   public Tile(Type t, int x, int y) {
-    xCor = x;
-    yCor = y;
+    row = x;
+    col = y;
     inPlay = true; //special tiles start activated
     if(t == Type.NORMAL) {
       tileColor = color(128, TILE_ALPHA);
@@ -34,28 +33,32 @@ class Tile {
     }
   }
   
-  public void setNum(int numb) {
-    num = numb;
+  //override equals for endtile checking
+  public boolean equals(Object o) {
+    if(o instanceof Tile) {
+      Tile other = (Tile)o;
+      return other.row == row && other.col == col;
+    }
+    return false;
   }
-  
   public void setActive(boolean p) {
     inPlay = p;
   }
 
   public int getX() {
-     return xCor; 
+     return row; 
   }
   
   public int getY() {
-     return yCor; 
+     return col; 
   }
   public boolean isActivated() {
     return inPlay;
   }   
 
   public void draw(int x, int y) {
-    xCor = x;
-    yCor = y;
+    row = x;
+    col = y;
     if(inPlay) {
       fill(tileColor);
       stroke(0);
@@ -63,8 +66,9 @@ class Tile {
       box(TILE_SIZE); 
       translate(-x * TILE_SIZE, -y * TILE_SIZE, 0);
       fill(0);
-      if(SHOW_COORDS) text(x + ", " + y, x * TILE_SIZE - TILE_SIZE / 2, y * TILE_SIZE + TILE_SIZE / 2, TILE_SIZE / 2 + 5);
-      if(SHOW_NUMBER) text(num, x * TILE_SIZE - TILE_SIZE / 2, y * TILE_SIZE + TILE_SIZE / 2, TILE_SIZE / 2 + 5);
+      if(DEBUG) {
+        if(SHOW_COORDS) text(x + ", " + y, x * TILE_SIZE - TILE_SIZE / 2, y * TILE_SIZE + TILE_SIZE / 2, TILE_SIZE / 2 + 5);
+      }
     }
   }
 }

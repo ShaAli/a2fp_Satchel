@@ -4,7 +4,6 @@ class Board {
   private long seed;
   private Random RNG;
   private Tile startTile, endTile;
-  private int tilesAlive;
   
   public Board() { // makes an empty board 
     this((long) ((Math.random() * Long.MAX_VALUE - Long.MAX_VALUE / 2) * 2));
@@ -24,7 +23,6 @@ class Board {
     }
     seed = s;
     RNG = new Random(seed);
-    tilesAlive = 0;
   }
   
   public Board(Board other) { // copy constructor for board storage
@@ -32,7 +30,6 @@ class Board {
     RNG = new Random(seed); 
     startTile = new Tile(other.startTile);
     endTile = new Tile(other.endTile);
-    tilesAlive = other.tilesAlive;
     board = new Tile[other.board.length][other.board[0].length];
     for(int x = 0; x < board.length; x++) {
       for(int y = 0; y < board[0].length; y++) {
@@ -49,54 +46,52 @@ class Board {
     return endTile;
   }
   
-  public int numAlive() {return tilesAlive;}
-  public void killTile() { tilesAlive--; }
+  public int tilesAlive() { //replace old system with an actual counting method, bc other one barely worked
+    int num = 0;
+    for(int r = 0; r < board.length; r++) {
+      for(int c = 0; c < board[0].length; c++) {
+        if(board[r][c].isActivated()) num++;
+      }
+    }
+    return num;
+  }
+    
+  
   public void createBoard() {
-    int x = (int)(RNG.nextFloat() * BOARD_SIZE);
-    int y = (int)(RNG.nextFloat() * BOARD_SIZE);
-    board[x][y] = new Tile(Type.START, x, y);
-    startTile = board[x][y];
+    int r = (int)(RNG.nextFloat() * board.length);
+    int c = (int)(RNG.nextFloat() * board[0].length);
+    board[r][c] = new Tile(Type.START, r, c);
+    startTile = board[r][c];
     int tilesmade = 0;
     
     while (tilesmade < (BOARD_SIZE * BOARD_SIZE / 2)) { // for now, fill half the board 
       
       int random = (int)(RNG.nextFloat()*4);
       try {
-        if ((random == 0) && !board[x+1][y].isActivated()) {
-          board[x+1][y].setActive(true);
-          x++;
-          tilesAlive++;
-          board[x][y].setNum(tilesAlive);
+        if ((random == 0) && !board[r+1][c].isActivated()) {
+          board[r+1][c].setActive(true);
+          r++;
         }
-        else if ((random == 1) && !board[x][y+1].isActivated()) {
-          board[x][y+1].setActive(true);
-          y++;
-          tilesAlive++;
-          board[x][y].setNum(tilesAlive);
+        else if ((random == 1) && !board[r][c+1].isActivated()) {
+          board[r][c+1].setActive(true);
+          c++;
         }
-        else if ((random == 2) && !board[x-1][y].isActivated()) {
-          board[x-1][y].setActive(true);
-          x--;
-          tilesAlive++;
-          board[x][y].setNum(tilesAlive);
+        else if ((random == 2) && !board[r-1][c].isActivated()) {
+          board[r-1][c].setActive(true);
+          r--;
         }
-        else if ((random == 3) && !board[x][y-1].isActivated()) {
-          board[x][y-1].setActive(true);
-          y--;
-          tilesAlive++;
-          board[x][y].setNum(tilesAlive);
+        else if ((random == 3) && !board[r][c-1].isActivated()) {
+          board[r][c-1].setActive(true);
+          c--;
         }
-        //tilesAlive++;
-        
-        
       }
       catch (IndexOutOfBoundsException e) { // occurs if we go outside board, just stops
       }
       tilesmade++;
     }
     //at the end, x,y will be the last tile, make it an end tile
-    board[x][y] = new Tile(Type.END, x, y);
-    endTile = board[x][y];
+    board[r][c] = new Tile(Type.END, r, c);
+    endTile = board[r][c];
   }
 
   public void draw() {
@@ -108,4 +103,10 @@ class Board {
     }
     
   }
+}
+
+public Board generateBoard() {
+    Board board = new Board();
+    board.createBoard();
+    return board;
 }
