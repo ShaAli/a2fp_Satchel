@@ -89,7 +89,7 @@ class Player {
   }
 
 
-  public void draw() {
+public void draw() {
     int x = curr.getX();
     int y = curr.getY();
     int z = curr.getZ();
