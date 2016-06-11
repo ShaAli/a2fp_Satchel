@@ -1,6 +1,6 @@
 import java.util.Random;
 class Board {
-  public Tile[][] board;
+  public Tile[][][]board;
   private long seed;
   private Random RNG;
   private Tile startTile, endTile;
@@ -16,11 +16,13 @@ class Board {
   public long getSeed() { return seed; }
 
   public Board(long s) { // seeds RNG
-    board = new Tile[BOARD_SIZE][BOARD_SIZE];
-    for (int r = 0; r < BOARD_SIZE; r++) {
-      for (int c = 0; c < BOARD_SIZE; c++) {
-        board[r][c] = new Tile(r, c);
-      }
+    board = new Tile[BOARD_SIZE][BOARD_SIZE][BOARD_SIZE];
+    for (int x = 0; x < BOARD_SIZE; x++) {
+      for (int y = 0; y < BOARD_SIZE; y++) {
+          for (int z = 0; z < BOARD_SIZE; z++) {
+              board[x][y][z] = new Tile(x, y, z);  
+          }  
+       }
     }
     seed = s;
     RNG = new Random(seed);
@@ -33,11 +35,13 @@ class Board {
     startTile = new Tile(other.startTile);
     endTile = new Tile(other.endTile);
     tilesAlive = other.tilesAlive;
-    board = new Tile[other.board.length][other.board[0].length];
+    board = new Tile[other.board.length][other.board[0].length][other.board[0][0].length];
     for(int x = 0; x < board.length; x++) {
       for(int y = 0; y < board[0].length; y++) {
-        board[x][y] = new Tile(other.board[x][y]);
-      }
+          for(int z = 0; z < board[0][0].length; z++){
+              board[x][y][z] = new Tile(other.board[x][y][z]);
+          }
+       }
     }
   }
   
@@ -45,46 +49,55 @@ class Board {
     return startTile;
     
   }
-  public Tile getEnd() {
-    return endTile;
-  }
-  
   public int numAlive() {return tilesAlive;}
   public void killTile() { tilesAlive--; }
   public void createBoard() {
     int x = (int)(RNG.nextFloat() * BOARD_SIZE);
     int y = (int)(RNG.nextFloat() * BOARD_SIZE);
-    board[x][y] = new Tile(Type.START, x, y);
-    startTile = board[x][y];
+    int z = (int)(RNG.nextFloat() * BOARD_SIZE);
+    board[x][y][z] = new Tile(Type.START, x, y, z);
+    startTile = board[x][y][z];
     int tilesmade = 0;
     
     while (tilesmade < (BOARD_SIZE * BOARD_SIZE / 2)) { // for now, fill half the board 
       
-      int random = (int)(RNG.nextFloat()*4);
+      int random = (int)(RNG.nextFloat()*6);
       try {
-        if ((random == 0) && !board[x+1][y].isActivated()) {
-          board[x+1][y].setActive(true);
+        if ((random == 0) && !board[x+1][y][z].isActivated()) {
+          board[x+1][y][z].setActive(true);
           x++;
           tilesAlive++;
-          board[x][y].setNum(tilesAlive);
+          board[x][y][z].setNum(tilesAlive);
         }
-        else if ((random == 1) && !board[x][y+1].isActivated()) {
-          board[x][y+1].setActive(true);
+        else if ((random == 1) && !board[x][y+1][z].isActivated()) {
+          board[x][y+1][z].setActive(true);
           y++;
           tilesAlive++;
-          board[x][y].setNum(tilesAlive);
+          board[x][y][z].setNum(tilesAlive);
         }
-        else if ((random == 2) && !board[x-1][y].isActivated()) {
-          board[x-1][y].setActive(true);
+        else if ((random == 2) && !board[x][y][z+1].isActivated()) {
+          board[x][y][z+1].setActive(true);
+          z++;
+          tilesAlive++;
+          board[x][y][z].setNum(tilesAlive);
+        }
+        else if ((random == 3) && !board[x-1][y][z].isActivated()) {
+          board[x-1][y][z].setActive(true);
           x--;
           tilesAlive++;
-          board[x][y].setNum(tilesAlive);
+          board[x][y][z].setNum(tilesAlive);
         }
-        else if ((random == 3) && !board[x][y-1].isActivated()) {
-          board[x][y-1].setActive(true);
+        else if ((random == 4) && !board[x][y-1][z].isActivated()) {
+          board[x][y-1][z].setActive(true);
           y--;
           tilesAlive++;
-          board[x][y].setNum(tilesAlive);
+          board[x][y][z].setNum(tilesAlive);
+        }
+        else if ((random == 5) && !board[x][y][z-1].isActivated()) {
+          board[x][y][z-1].setActive(true);
+          z--;
+          tilesAlive++;
+          board[x][y][z].setNum(tilesAlive);
         }
         //tilesAlive++;
         
@@ -95,17 +108,18 @@ class Board {
       tilesmade++;
     }
     //at the end, x,y will be the last tile, make it an end tile
-    board[x][y] = new Tile(Type.END, x, y);
-    endTile = board[x][y];
+    board[x][y][z] = new Tile(Type.END, x, y, z);
+    endTile = board[x][y][z];
   }
 
   public void draw() {
     fill(0);
     for(int x = 0; x < BOARD_SIZE; x++) {
       for(int y = 0; y < BOARD_SIZE; y++) {
-        board[x][y].draw(x,y);
+          for(int z = 0; z < BOARD_SIZE; z++){
+            board[x][y][z].draw(x,y,z);
+          }
       }
     }
-    
   }
 }
