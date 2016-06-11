@@ -87,10 +87,9 @@ class Player {
       int z = curr.getZ();
       fill(0);
       stroke(0);
-      translate(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE * 3/4);
+      translate(x * TILE_SIZE, y * TILE_SIZE, z * TILE_SIZE * 3 / 4);
       box(TILE_SIZE / 2); 
       fill(0);
-      
     }
   }
 }
