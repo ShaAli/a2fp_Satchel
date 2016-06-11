@@ -55,6 +55,14 @@ class Tile {
     return inPlay;
   }   
 
+  public boolean equals(Object o) {
+    if(o instanceof Tile) {
+      Tile other = (Tile)o;
+      return other.xCor == xCor && other.yCor == yCor && other.zCor == zCor;
+    }
+    return false;
+  }
+
   public void draw(int x, int y, int z) {
     xCor = x;
     yCor = y;
