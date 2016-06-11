@@ -4,7 +4,6 @@ class Board {
   private long seed;
   private Random RNG;
   private Tile startTile, endTile;
-  private int tilesAlive;
   
   public Board() { // makes an empty board 
     this((long) ((Math.random() * Long.MAX_VALUE - Long.MAX_VALUE / 2) * 2));
@@ -26,7 +25,6 @@ class Board {
     }
     seed = s;
     RNG = new Random(seed);
-    tilesAlive = 0;
   }
   
   public Board(Board other) { // copy constructor for board storage
@@ -34,7 +32,6 @@ class Board {
     RNG = new Random(seed); 
     startTile = new Tile(other.startTile);
     endTile = new Tile(other.endTile);
-    tilesAlive = other.tilesAlive;
     board = new Tile[other.board.length][other.board[0].length][other.board[0][0].length];
     for(int x = 0; x < board.length; x++) {
       for(int y = 0; y < board[0].length; y++) {
@@ -49,12 +46,26 @@ class Board {
     return startTile;
     
   }
-  public int numAlive() {return tilesAlive;}
-  public void killTile() { tilesAlive--; }
+  public Tile getEnd() {
+    return endTile;
+  }
+  
+  public int tilesAlive() { //replace old system with an actual counting method, bc other one barely worked
+    int num = 0;
+    for(int x = 0; x < board.length; x++) {
+      for(int y = 0; y < board[0].length; y++) {
+        for(int z = 0; z < board[0][0].length; z++) {
+          if(board[x][y][z].isActivated()) num++;
+        }
+      }
+    }
+    return num;
+  }
+  
   public void createBoard() {
-    int x = (int)(RNG.nextFloat() * BOARD_SIZE);
-    int y = (int)(RNG.nextFloat() * BOARD_SIZE);
-    int z = (int)(RNG.nextFloat() * BOARD_SIZE);
+    int x = (int)(RNG.nextFloat() * board.length);
+    int y = (int)(RNG.nextFloat() * board[0].length);
+    int z = (int)(RNG.nextFloat() * board[0][0].length);
     board[x][y][z] = new Tile(Type.START, x, y, z);
     startTile = board[x][y][z];
     int tilesmade = 0;
@@ -66,38 +77,26 @@ class Board {
         if ((random == 0) && !board[x+1][y][z].isActivated()) {
           board[x+1][y][z].setActive(true);
           x++;
-          tilesAlive++;
-          board[x][y][z].setNum(tilesAlive);
         }
         else if ((random == 1) && !board[x][y+1][z].isActivated()) {
           board[x][y+1][z].setActive(true);
           y++;
-          tilesAlive++;
-          board[x][y][z].setNum(tilesAlive);
         }
         else if ((random == 2) && !board[x][y][z+1].isActivated()) {
           board[x][y][z+1].setActive(true);
           z++;
-          tilesAlive++;
-          board[x][y][z].setNum(tilesAlive);
         }
         else if ((random == 3) && !board[x-1][y][z].isActivated()) {
           board[x-1][y][z].setActive(true);
           x--;
-          tilesAlive++;
-          board[x][y][z].setNum(tilesAlive);
         }
         else if ((random == 4) && !board[x][y-1][z].isActivated()) {
           board[x][y-1][z].setActive(true);
           y--;
-          tilesAlive++;
-          board[x][y][z].setNum(tilesAlive);
         }
         else if ((random == 5) && !board[x][y][z-1].isActivated()) {
           board[x][y][z-1].setActive(true);
           z--;
-          tilesAlive++;
-          board[x][y][z].setNum(tilesAlive);
         }
         //tilesAlive++;
         
@@ -122,4 +121,10 @@ class Board {
       }
     }
   }
+}
+
+public Board generateBoard() {
+    Board board = new Board();
+    board.createBoard();
+    return board;
 }
