@@ -6,7 +6,6 @@ class Tile {
   private int xCor;
   private int yCor;
   private int zCor;
-  private int num;
   
   public Tile(int x, int y, int z) { // used when making tile array
     this(Type.NORMAL, x, y, z); // normal type 
@@ -18,6 +17,7 @@ class Tile {
     tileColor = other.tileColor;
     xCor = other.xCor;
     yCor = other.yCor;
+    zCor = other.zCor;
   }
   
   public Tile(Type t, int x, int y, int z) {
@@ -34,10 +34,6 @@ class Tile {
     if(t == Type.END) {
       tileColor = color(200, 50, 50, TILE_ALPHA);
     }
-  }
-  
-  public void setNum(int numb) {
-    num = numb;
   }
   
   public void setActive(boolean p) {
@@ -60,6 +56,14 @@ class Tile {
     return inPlay;
   }   
 
+  public boolean equals(Object o) {
+    if(o instanceof Tile) {
+      Tile other = (Tile)o;
+      return other.xCor == xCor && other.yCor == yCor && other.zCor == zCor;
+    }
+    return false;
+  }
+
   public void draw(int x, int y, int z) {
     xCor = x;
     yCor = y;
@@ -71,8 +75,14 @@ class Tile {
       box(TILE_SIZE); 
       translate(-x * TILE_SIZE, -y * TILE_SIZE, -z * TILE_SIZE);
       fill(0);
+<<<<<<< HEAD
       //if(SHOW_COORDS) text(x + ", " + y, x * TILE_SIZE - TILE_SIZE / 2, y * TILE_SIZE + TILE_SIZE / 2, TILE_SIZE / 2 + 5);
       //if(SHOW_NUMBER) text(num, x * TILE_SIZE - TILE_SIZE / 2, y * TILE_SIZE + TILE_SIZE / 2, TILE_SIZE / 2 + 5);
+=======
+      if(DEBUG) {
+        if(SHOW_COORDS) text(x + ", " + y + ", " + z, x * TILE_SIZE - TILE_SIZE / 2, y * TILE_SIZE + TILE_SIZE / 2, z * TILE_SIZE - TILE_SIZE / 2);
+      }
+>>>>>>> 517cec28fa3ac071a9402f3a00fc41b7a9618da8
     }
   }
 }
