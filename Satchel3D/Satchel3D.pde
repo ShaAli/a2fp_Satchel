@@ -5,7 +5,7 @@ final int TILE_ALPHA = 120;
 
 //debug governs SHOW_ functions, i.e. if debug is false and the SHOW_ vars are true, the info won't be printed
 //debug being true also means other debug info
-final boolean DEBUG = true;
+final boolean DEBUG = false;
 final boolean SHOW_COORDS = true;
 
 float rotX = 0.6;
@@ -21,7 +21,7 @@ public void settings() {
 
 public void setup() {
   hint(DISABLE_OPTIMIZED_STROKE);
-  strokeWeight(3);
+  strokeWeight(TILE_SIZE / 12);
   PFont font = createFont("ACaslonPro-Bold-20.vlw", 20);
   textFont(font);
   smooth();
@@ -46,12 +46,25 @@ public void draw() {
   fill(0);
   text("Seed: " + board.getSeed(), 50, 50);
   text("Level: " + player.getLevel(), 50, 100);
+  
   if(DEBUG) {
     //text("Alive: " + board.tilesAlive(), 50, 150);
     text("Player pos: " + player.getCurrent().getX() + ", " + player.getCurrent().getY() + ", " + player.getCurrent().getZ(), 50, 200);
     text("Start pos: " + board.startTile.getX() + ", " + board.startTile.getY() + ", " + board.startTile.getZ(), 50, 250);
     text("End pos: " + board.endTile.getX() + ", " + board.endTile.getY() + ", " + board.endTile.getZ(), 50, 300);
     //text("Player == end check: " + board.endTile.equals(player.getCurrent()), 50, 350); 
+  }
+  else {
+    noStroke();
+    fill(255, 0, 0);
+    rect(50, 130, 30, 30);
+    text("X", 90, 150);
+    fill(0, 255, 0);
+    rect(50, 180, 30, 30);
+    text("Y", 90, 200);
+    fill(0, 0, 255);
+    rect(50, 230, 30, 30);
+    text("Z", 90, 250);
   }
   scale(scale);
   translate(BOARD_SIZE * TILE_SIZE, BOARD_SIZE * TILE_SIZE); //to rotate around center

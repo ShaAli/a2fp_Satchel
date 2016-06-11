@@ -120,6 +120,17 @@ class Board {
           }
       }
     }
+    //draw axes
+    strokeWeight(TILE_SIZE / 5);
+    stroke(255,0,0);
+    line(-TILE_SIZE, -TILE_SIZE, -TILE_SIZE, TILE_SIZE * 3, -TILE_SIZE, -TILE_SIZE); //top is D
+    stroke(0,255,0);
+    line(-TILE_SIZE, -TILE_SIZE, -TILE_SIZE, -TILE_SIZE, TILE_SIZE * 3, -TILE_SIZE); //top is S
+    stroke(0,0,255);
+    line(-TILE_SIZE, -TILE_SIZE, -TILE_SIZE, -TILE_SIZE, -TILE_SIZE, TILE_SIZE * 3); //top is Q
+    strokeWeight(TILE_SIZE / 12);
+   
+
   }
 }
 
