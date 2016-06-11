@@ -17,6 +17,7 @@ class Tile {
     tileColor = other.tileColor;
     xCor = other.xCor;
     yCor = other.yCor;
+    zCor = other.zCor;
   }
   
   public Tile(Type t, int x, int y, int z) {
