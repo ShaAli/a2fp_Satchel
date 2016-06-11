@@ -89,19 +89,7 @@ class Player {
   }
 
 
-  public void draw() {
-<<<<<<< HEAD
-    if(alive) {
-      int x = curr.getX();
-      int y = curr.getY();
-      int z = curr.getZ();
-      fill(0);
-      stroke(0);
-      translate(x * TILE_SIZE, y * TILE_SIZE, z * TILE_SIZE * 3 / 4);
-      box(TILE_SIZE / 2); 
-      fill(0);
-    }
-=======
+public void draw() {
     int x = curr.getX();
     int y = curr.getY();
     int z = curr.getZ();
@@ -110,6 +98,5 @@ class Player {
     translate(x * TILE_SIZE, y * TILE_SIZE, z * TILE_SIZE);
     box(TILE_SIZE + 3); 
     fill(0);
->>>>>>> 517cec28fa3ac071a9402f3a00fc41b7a9618da8
   }
 }

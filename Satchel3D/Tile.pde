@@ -75,14 +75,11 @@ class Tile {
       box(TILE_SIZE); 
       translate(-x * TILE_SIZE, -y * TILE_SIZE, -z * TILE_SIZE);
       fill(0);
-<<<<<<< HEAD
       //if(SHOW_COORDS) text(x + ", " + y, x * TILE_SIZE - TILE_SIZE / 2, y * TILE_SIZE + TILE_SIZE / 2, TILE_SIZE / 2 + 5);
       //if(SHOW_NUMBER) text(num, x * TILE_SIZE - TILE_SIZE / 2, y * TILE_SIZE + TILE_SIZE / 2, TILE_SIZE / 2 + 5);
-=======
       if(DEBUG) {
         if(SHOW_COORDS) text(x + ", " + y + ", " + z, x * TILE_SIZE - TILE_SIZE / 2, y * TILE_SIZE + TILE_SIZE / 2, z * TILE_SIZE - TILE_SIZE / 2);
       }
->>>>>>> 517cec28fa3ac071a9402f3a00fc41b7a9618da8
     }
   }
 }
