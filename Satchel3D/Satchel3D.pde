@@ -1,13 +1,13 @@
-final int BOARD_SIZE = 8;
-final int TILE_SIZE = 60;
-final int BLOCK_SIZE = 70;
-final int TILE_ALPHA = 120;
+final int BOARD_SIZE = 7;
+final int TILE_SIZE = 120;
+final int TILE_ALPHA = 90;
 
 //debug governs SHOW_ functions, i.e. if debug is false and the SHOW_ vars are true, the info won't be printed
 //debug being true also means other debug info
 final boolean DEBUG = false;
 final boolean SHOW_COORDS = true;
 
+PFont font;
 float rotX = 0.6;
 float rotY = 0;
 float scale = 0.5;
@@ -22,7 +22,7 @@ public void settings() {
 public void setup() {
   hint(DISABLE_OPTIMIZED_STROKE);
   strokeWeight(TILE_SIZE / 12);
-  PFont font = createFont("ACaslonPro-Bold-20.vlw", 20);
+  font = createFont("ACaslonPro-Bold-20.vlw", 20);
   textFont(font);
   smooth();
   background(180);
@@ -71,11 +71,22 @@ public void draw() {
   rotateX(rotX);
   rotateY(rotY);
   translate(-BOARD_SIZE * TILE_SIZE, -BOARD_SIZE * TILE_SIZE); // undo centering
-  translate(BOARD_SIZE * TILE_SIZE / 4, BOARD_SIZE * TILE_SIZE / 2 - TILE_SIZE * 6, -TILE_SIZE * 3); // for better board centering, might improve on this later with pan
-
+  translate(BOARD_SIZE * TILE_SIZE / 2, BOARD_SIZE * TILE_SIZE / 2, -TILE_SIZE * 3); // for better board centering
+  //lighting
+  ambientLight(150, 150, 150);
+  pointLight(140, 140, 200, -TILE_SIZE / 2, -TILE_SIZE / 2, -TILE_SIZE / 2); // light from just below origin
   board.draw();
   player.draw();
 } 
+
+public void rotateAroundPoint(float x, float y, float z, float rx, float ry, float rz) { // after this, pop the matrix
+  pushMatrix();
+  translate(x,y,z);
+  rotateX(rx);
+  rotateY(ry);
+  rotateZ(rz);
+}
+  
 
 public void keyPressed() {
   char k = Character.toLowerCase(key);

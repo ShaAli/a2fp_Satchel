@@ -121,14 +121,34 @@ class Board {
       }
     }
     //draw axes
+    textFont(font, TILE_SIZE);
     strokeWeight(TILE_SIZE / 5);
     stroke(255,0,0);
-    line(-TILE_SIZE, -TILE_SIZE, -TILE_SIZE, TILE_SIZE * 3, -TILE_SIZE, -TILE_SIZE); //top is D
+    line(-TILE_SIZE * 3, -TILE_SIZE, -TILE_SIZE, TILE_SIZE, -TILE_SIZE, -TILE_SIZE); //top is D
+    rotateAroundPoint(TILE_SIZE, -TILE_SIZE, -TILE_SIZE, 0, 0, 0);
+    text("D", 0, TILE_SIZE / 4, 0);
+    popMatrix();
+    rotateAroundPoint(-TILE_SIZE * 3, -TILE_SIZE, -TILE_SIZE, 0, 0, 0);
+    text("A", -TILE_SIZE + 30, TILE_SIZE / 4, 0);
+    popMatrix();
     stroke(0,255,0);
-    line(-TILE_SIZE, -TILE_SIZE, -TILE_SIZE, -TILE_SIZE, TILE_SIZE * 3, -TILE_SIZE); //top is S
+    line(-TILE_SIZE, -TILE_SIZE * 3, -TILE_SIZE, -TILE_SIZE, TILE_SIZE, -TILE_SIZE); //top is S
+    rotateAroundPoint(-TILE_SIZE, TILE_SIZE, -TILE_SIZE, 0, 0, PI / 2);
+    text("S", 0, TILE_SIZE / 4, 0);
+    popMatrix();
+    rotateAroundPoint(-TILE_SIZE, -TILE_SIZE * 3, -TILE_SIZE, 0, 0, PI / 2);
+    text("W", -TILE_SIZE, TILE_SIZE / 4, 0);
+    popMatrix();
     stroke(0,0,255);
-    line(-TILE_SIZE, -TILE_SIZE, -TILE_SIZE, -TILE_SIZE, -TILE_SIZE, TILE_SIZE * 3); //top is Q
+    line(-TILE_SIZE, -TILE_SIZE, -TILE_SIZE * 3, -TILE_SIZE, -TILE_SIZE, TILE_SIZE); //top is Q
+    rotateAroundPoint(-TILE_SIZE, -TILE_SIZE, TILE_SIZE, -PI / 2, -PI / 2, 0);
+    text("Q", -TILE_SIZE / 4 - 10, -10, 0);
+    popMatrix();
+    rotateAroundPoint(-TILE_SIZE, -TILE_SIZE, -TILE_SIZE * 3, PI, -PI / 2, 0);
+    text("E", TILE_SIZE / 4 - 10, 40, 0);
+    popMatrix();
     strokeWeight(TILE_SIZE / 12);
+    textFont(font);
    
 
   }
