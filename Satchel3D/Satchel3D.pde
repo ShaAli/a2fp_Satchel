@@ -8,7 +8,7 @@ final boolean DEBUG = false;
 final boolean SHOW_COORDS = true;
 
 PFont font;
-float rotX = 0.6;
+float rotX = 0;
 float rotY = 0;
 float scale = 0.5;
 int oldMouseX = mouseX;
@@ -16,7 +16,7 @@ int oldMouseY = mouseY;
 Player player;
 
 public void settings() {
-  size(BOARD_SIZE * TILE_SIZE + 50, BOARD_SIZE * TILE_SIZE + 50, P3D);
+  size(BOARD_SIZE * TILE_SIZE + 200, BOARD_SIZE * TILE_SIZE + 50, P3D);
 }
 
 public void setup() {
@@ -66,15 +66,19 @@ public void draw() {
     rect(50, 230, 30, 30);
     text("Z", 90, 250);
   }
+  beginCamera();
+  camera();
   scale(scale);
-  translate(BOARD_SIZE * TILE_SIZE, BOARD_SIZE * TILE_SIZE); //to rotate around center
+  translate(BOARD_SIZE * TILE_SIZE / 2 / scale, BOARD_SIZE * TILE_SIZE / 2 / scale); //to rotate around center
   rotateX(rotX);
   rotateY(rotY);
-  translate(-BOARD_SIZE * TILE_SIZE, -BOARD_SIZE * TILE_SIZE); // undo centering
-  translate(BOARD_SIZE * TILE_SIZE / 2, BOARD_SIZE * TILE_SIZE / 2, -TILE_SIZE * 3); // for better board centering
+  translate(-BOARD_SIZE * TILE_SIZE / 2 / scale, -BOARD_SIZE * TILE_SIZE / 2 / scale); // undo centering
+  translate(BOARD_SIZE * TILE_SIZE / 4 / scale, BOARD_SIZE * TILE_SIZE / 4 / scale, -TILE_SIZE * 3); // for better board centering
+  endCamera();
   //lighting
   ambientLight(150, 150, 150);
   pointLight(140, 140, 200, -TILE_SIZE / 2, -TILE_SIZE / 2, -TILE_SIZE / 2); // light from just below origin
+  
   board.draw();
   player.draw();
 } 

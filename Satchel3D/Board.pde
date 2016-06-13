@@ -121,6 +121,7 @@ class Board {
       }
     }
     //draw axes
+    //ortho();
     textFont(font, TILE_SIZE);
     strokeWeight(TILE_SIZE / 5);
     stroke(255,0,0);
@@ -149,7 +150,7 @@ class Board {
     popMatrix();
     strokeWeight(TILE_SIZE / 12);
     textFont(font);
-   
+    //perspective();
 
   }
 }
