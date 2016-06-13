@@ -44,7 +44,7 @@ public void draw() {
   }
   background(180);
   fill(0);
-  text("Seed: " + board.getSeed(), 50, 50);
+  //text("Seed: " + board.getSeed(), 50, 50);
   text("Level: " + player.getLevel(), 50, 100);
   text("Score: " + player.getScore(), 50, 150);
   
