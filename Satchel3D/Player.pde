@@ -3,18 +3,22 @@ class Player {
   private Board gameboard;
   private Tile curr;
   private int level;
+  private int score;
+  private int multiplier;
   
   public Player() { // nothing, for setup
     layout = null;
     gameboard = null;
     curr = null;
     level = 1;
+    score = 0;
   }
   public Player(Board b) { // players board
     this();
     gameboard = new Board(b);
     layout = new Board(b);
     curr = gameboard.getStart();
+    multiplier = gameboard.tilesAlive();
   }
 
   public Board getBoard() { 
@@ -23,12 +27,17 @@ class Player {
   public int getLevel() { 
     return level;
   }
+  public int getScore() {
+    return score;
+  }
 
   public void die() {
     gameboard = new Board(layout);
     curr = gameboard.getStart();
+    score = score - 5;
   }
   public void win() {
+    score = score + (multiplier * 3);
     newBoard();
     level++;
   }
@@ -36,6 +45,7 @@ class Player {
     gameboard = generateBoard();
     layout = new Board(gameboard);
     curr = gameboard.getStart();
+    multiplier = gameboard.tilesAlive();
   }
   public void end() { // used when end tile is hit. If end is last tile, you win, otherwise you die
     if (gameboard.tilesAlive() <= 1) { // if you are standing on the last tile, there will be 1 tile left

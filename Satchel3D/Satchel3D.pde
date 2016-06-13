@@ -46,6 +46,7 @@ public void draw() {
   fill(0);
   text("Seed: " + board.getSeed(), 50, 50);
   text("Level: " + player.getLevel(), 50, 100);
+  text("Score: " + player.getScore(), 50, 150);
   
   if(DEBUG) {
     //text("Alive: " + board.tilesAlive(), 50, 150);
@@ -57,14 +58,14 @@ public void draw() {
   else {
     noStroke();
     fill(255, 0, 0);
-    rect(50, 130, 30, 30);
-    text("X", 90, 150);
-    fill(0, 255, 0);
     rect(50, 180, 30, 30);
-    text("Y", 90, 200);
-    fill(0, 0, 255);
+    text("X", 90, 200);
+    fill(0, 255, 0);
     rect(50, 230, 30, 30);
-    text("Z", 90, 250);
+    text("Y", 90, 250);
+    fill(0, 0, 255);
+    rect(50, 280, 30, 30);
+    text("Z", 90, 300);
   }
   scale(scale);
   translate(BOARD_SIZE * TILE_SIZE / 2 / scale, BOARD_SIZE * TILE_SIZE / 2 / scale); //to rotate around center

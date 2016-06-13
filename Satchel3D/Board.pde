@@ -50,7 +50,7 @@ class Board {
     return endTile;
   }
   
-  public int tilesAlive() { //replace old system with an actual counting method, bc other one barely worked
+  public int tilesAlive() {
     int num = 0;
     for(int x = 0; x < board.length; x++) {
       for(int y = 0; y < board[0].length; y++) {
