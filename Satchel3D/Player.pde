@@ -38,7 +38,6 @@ class Player {
     curr = gameboard.getStart();
   }
   public void end() { // used when end tile is hit. If end is last tile, you win, otherwise you die
-    print("End called");
     if (gameboard.tilesAlive() <= 1) { // if you are standing on the last tile, there will be 1 tile left
       win();
     } else {

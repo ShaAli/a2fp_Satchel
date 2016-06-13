@@ -29,7 +29,7 @@ class Tile {
       tileColor = color(128, TILE_ALPHA);
     }
     if(t == Type.START) {
-      tileColor = color(50, 200, 50, TILE_ALPHA);
+      tileColor = color(128, TILE_ALPHA);
     }
     if(t == Type.END) {
       tileColor = color(200, 50, 50, TILE_ALPHA);

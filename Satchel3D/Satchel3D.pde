@@ -66,15 +66,12 @@ public void draw() {
     rect(50, 230, 30, 30);
     text("Z", 90, 250);
   }
-  beginCamera();
-  camera();
   scale(scale);
   translate(BOARD_SIZE * TILE_SIZE / 2 / scale, BOARD_SIZE * TILE_SIZE / 2 / scale); //to rotate around center
   rotateX(rotX);
   rotateY(rotY);
   translate(-BOARD_SIZE * TILE_SIZE / 2 / scale, -BOARD_SIZE * TILE_SIZE / 2 / scale); // undo centering
   translate(BOARD_SIZE * TILE_SIZE / 4 / scale, BOARD_SIZE * TILE_SIZE / 4 / scale, -TILE_SIZE * 3); // for better board centering
-  endCamera();
   //lighting
   ambientLight(150, 150, 150);
   pointLight(140, 140, 200, -TILE_SIZE / 2, -TILE_SIZE / 2, -TILE_SIZE / 2); // light from just below origin
