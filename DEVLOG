@@ -15,3 +15,8 @@ Gabriel 		6/6		Transparent Tiles
 Sachal 			6/7 		Started game end, death
 Gabriel 		6/9		Finished game end and death
 Sachal 			6/9 		Level Incrementing
+Shanjeed		6/11		3D structures + generation
+Gabriel			6/11		Major refactoring
+Gabriel			6/11		Fix large issue with end + death
+Gabriel			6/11		Add axes
+Gabriel			6/12		Add axes lettering
