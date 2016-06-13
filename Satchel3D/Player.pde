@@ -5,7 +5,8 @@ class Player {
   private int level;
   private int score;
   private int multiplier;
-  
+  private long start;
+  private long end;
   public Player() { // nothing, for setup
     layout = null;
     gameboard = null;
@@ -19,6 +20,7 @@ class Player {
     layout = new Board(b);
     curr = gameboard.getStart();
     multiplier = gameboard.tilesAlive();
+    start = System.currentTimeMillis();
   }
 
   public Board getBoard() { 
@@ -37,7 +39,14 @@ class Player {
     score = score - 5;
   }
   public void win() {
-    score = score + (multiplier * 3);
+    end = System.currentTimeMillis();
+    int timebonus = 60 - (int)((end-start)/1000);
+    if (timebonus>0){
+      score = score + (multiplier*3) + timebonus;
+    }
+    else{
+      score = score + (multiplier*3);
+    }
     newBoard();
     level++;
   }
@@ -46,6 +55,7 @@ class Player {
     layout = new Board(gameboard);
     curr = gameboard.getStart();
     multiplier = gameboard.tilesAlive();
+    start = System.currentTimeMillis();
   }
   public void end() { // used when end tile is hit. If end is last tile, you win, otherwise you die
     if (gameboard.tilesAlive() <= 1) { // if you are standing on the last tile, there will be 1 tile left
